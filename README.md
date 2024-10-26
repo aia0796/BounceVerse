@@ -1,5 +1,11 @@
 # Getting Started with Create React App
 
+## Add Contract Address BOUNCE to your wallet
+
+Contract Address = "0xEcf2Eb06d1713EcDae6Cf8d57a3998fcBf1A5AA7"
+
+[VERIFY BOUNCE HERE](https://testnet.aiascan.com/token/0xEcf2Eb06d1713EcDae6Cf8d57a3998fcBf1A5AA7)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
