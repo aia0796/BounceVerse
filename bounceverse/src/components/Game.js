@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import contractAddress from "../contracts/contractAddress.json"
+import contractAbi from "../contracts/contractAbi.json"
+import {BrowserProvider, ethers} from "ethers"
 
 const Game = () => {
   const canvasRef = useRef(null);
@@ -17,6 +20,18 @@ const Game = () => {
       velocityY: 0,
     }
   });
+  
+  const withdraw = async () =>{
+    const {abi} = contractAbi;
+    
+    const provider = new BrowserProvider(window.ethereum);
+
+    const signer = await provider.getSigner();
+    const address = await signer.getAddress();
+    const bounceContract = new ethers.Contract(contractAddress.address, abi, signer)
+
+    await (await bounceContract.mint(address, ethers.parseUnits(score.toString(), 18))).wait();
+  }
   
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -298,6 +313,7 @@ const Game = () => {
             <button
               onClick={async () => {
                 try {
+                  withdraw();
                   alert(`Claimed tokens for score: ${score}`);
                 } catch (error) {
                   console.error(error);
